@@ -1,0 +1,18 @@
+{
+  "name": "exacta-trading-bot",
+  "version": "1.0.0",
+  "description": "testing binance api with technical indicators",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^1.1.2",
+    "draw-candlestick": "^2.0.3",
+    "node-binance-api": "^0.9.1",
+    "technicalindicators": "^2.0.8",
+    "windows-build-tools": "^5.1.0"
+  }
+}
