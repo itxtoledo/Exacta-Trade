@@ -1,18 +1,19 @@
 {
-  "name": "exacta-trading-bot",
-  "version": "1.0.0",
-  "description": "testing binance api with technical indicators",
+  "name": "exacta-trade",
+  "version": "0.0.1",
+  "description": "binance api with technical indicators",
   "main": "main.js",
   "scripts": {
     "start": "node main.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Toledo",
+  "license": "MIT",
   "dependencies": {
-    "windows-build-tools": "^5.1.0",
     "draw-candlestick": "^2.0.3",
     "node-binance-api": "^0.9.1",
-    "technicalindicators": "^2.0.8"
-    
-  }
+    "technicalindicators": "^2.0.8",
+    "windows-build-tools": "^5.1.0"
+  },
+  "repository": "https://github.com/itxtoledo/Exacta-Trade.git",
+  "private": false
 }
