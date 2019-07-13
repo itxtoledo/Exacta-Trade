@@ -4,4 +4,4 @@ Using the TechnicalIndicators library to seek for opportunities to make profit.
 
 Help us to improve the code!
 
-(Telegram portuguese)[https://t.me/bitragem]
+[Telegram portuguese](https://t.me/bitragem)
