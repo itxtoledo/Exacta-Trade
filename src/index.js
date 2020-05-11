@@ -1,20 +1,6 @@
 import * as ti from "technicalindicators";
-import moment from "moment";
-// import drawCandleStick from "draw-candlestick";
-import Binance from "binance-api-node";
 import Candle from "./models/Candle";
 import _ from "lodash";
-
-const binance = Binance({
-  apiKey: process.env.BINANCE_APIKEY,
-  apiSecret: process.env.BINANCE_APISECRET,
-});
-
-// confiavel 5m e 10 candles
-var microsec = Date.now();
-var frameTime = "5m";
-var assetName = "BTC";
-var marketName = "USDT";
 
 // binance.candles(
 //   assetName + marketName,
@@ -46,31 +32,33 @@ var marketName = "USDT";
 //   { limit: 300, endTime: microsec }
 // );
 
-// console.log(Candle.findAll());
-binance
-  .candles({
-    symbol: "BTCUSDT",
-    interval: "5m",
-    startTime: moment("2019-01-01").valueOf(),
-    endTime: moment("2019-12-31").valueOf(),
-  })
-  .then(async (res) => {
-    for (let i = 0; i < res.length; i++) {
-      const kline = res[i];
+Candle.findAll().then((ticks) => {
+  // console.log(ticks.length);
+  const open = [];
+  const high = [];
+  const low = [];
+  const close = [];
+  for (let i = 0; i < ticks.length; i++) {
+    open.push(ticks[i].open);
+    high.push(ticks[i].high);
+    low.push(ticks[i].low);
+    close.push(ticks[i].close);
+  }
 
-      await Candle.create(
-        _.pick(kline, [
-          "openTime",
-          "closeTime",
-          "open",
-          "high",
-          "low",
-          "close",
-          "volume",
-          "trades",
-        ])
-      );
-    }
-  });
+  const candles = {
+    open,
+    high,
+    low,
+    close,
+  };
 
-console.log(moment("2018-01-01").valueOf());
+  for (let i = 0; i < candles.close.length; i += 42) {
+    console.log(i);
+    const closes = candles.close.slice(i, i + 43);
+    const EMA42 = ti.ema({ period: 42, values: closes });
+    const EMA21 = ti.ema({ period: 21, values: closes });
+    console.log("bullish", EMA21[EMA21.length - 1] > EMA42[EMA42.length - 1]);
+  }
+
+  // console.log("Bullish:", ti.bullish(candles));
+});
